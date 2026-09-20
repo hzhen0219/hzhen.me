@@ -1,0 +1,16 @@
+---
+import type { ServiceEntry } from '../data/service.ts';
+
+interface Props {
+  entry: ServiceEntry;
+}
+
+const { entry } = Astro.props;
+---
+
+<article class="entry">
+  <p class="entry__org">{entry.organisation}</p>
+  <h3 class="entry__heading">{entry.role}</h3>
+  <p class="entry__meta">{entry.period}</p>
+  {entry.description && <p class="entry__description">{entry.description}</p>}
+</article>

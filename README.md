@@ -57,6 +57,7 @@ hzhen.me/
     │   ├── ResearchDirections.astro Work-in-progress list
     │   ├── ResearchPillar.astro     One numbered research area
     │   ├── Section.astro            Sticky label + content, used by every section
+    │   ├── ServiceEntry.astro       One professional service appointment
     │   ├── SiteFooter.astro
     │   ├── SiteHeader.astro
     │   └── WorkEntry.astro
@@ -64,6 +65,7 @@ hzhen.me/
     │   ├── about.ts        Biography paragraphs
     │   ├── publications.ts Publications and preprints (empty by design)
     │   ├── research.ts     The three research pillars + current research
+    │   ├── service.ts      Professional service appointments (not employment)
     │   ├── site.ts         Name, role, hero statement, nav, links, SEO, contact
     │   └── work.ts         Selected work and education
     ├── layouts/
@@ -93,7 +95,8 @@ to touch a component.
 | **Contact** | `src/data/site.ts` → `contact` | See below. |
 | **Hero statement / role / name** | `src/data/site.ts` → `site` | |
 | **Page title, meta description, keywords** | `src/data/site.ts` → `seo` | |
-| **Selected work / education** | `src/data/work.ts` | Intentionally not a résumé — one restrained sentence per entry. |
+| **Selected work / education** | `src/data/work.ts` | Intentionally not a résumé — one restrained sentence per entry. Corporate job titles are deliberately not modelled; see below. |
+| **Professional service** | `src/data/service.ts` | Appointments, not employment. Kept out of the structured data; see below. |
 | **Section order or headings** | `src/pages/index.astro` | |
 | **Colours, type scale, spacing** | `src/styles/global.css` | All tokens are defined at the top under `:root`. |
 
@@ -126,6 +129,23 @@ export const publications: Publication[] = [
 Only `title`, `authors`, and `year` are required. Link buttons render only for the
 fields you actually provide. A commented copy of this example sits at the bottom of
 the file.
+
+### Job titles and professional service
+
+Two content boundaries are enforced in the code rather than left to convention.
+
+**Selected Work carries no job titles.** `WorkEntry` has no `role` field at all, so
+there is nothing to render. The section communicates organisation, technical area, and
+scope — what the work *was*, not what rank it carried. This keeps the identity portable
+across employers. If you ever want a title on the page, add the field back deliberately
+rather than by accident.
+
+**Professional service is not employment.** `src/data/service.ts` is a separate model
+from `src/data/work.ts` and is rendered in its own section. Critically, it is *not*
+added to the `affiliation` array in the Person structured data: schema.org
+`affiliation` reads as an employer relationship to search engines, which would
+misrepresent a volunteer institutional review appointment. `BaseLayout.astro` carries a
+comment to that effect — please keep service out of it.
 
 ### Adding LinkedIn
 

@@ -477,7 +477,10 @@ a:hover {
   text-wrap: pretty;
 }
 
-/* --- Work ---------------------------------------------------------------- */
+/* --- Work and professional service --------------------------------------- */
+/* Both sections share the .entry hierarchy: an uppercase organisation label, a
+   serif heading, an optional muted meta line, then prose. Professional service
+   deliberately gets no extra visual weight of its own. */
 
 .entries {
   display: grid;
@@ -512,7 +515,7 @@ a:hover {
   margin-top: 0.4rem;
 }
 
-.entry__role {
+.entry__meta {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--ink-muted);

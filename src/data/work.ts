@@ -4,17 +4,20 @@
  * This is intentionally not a résumé: include only positions that support the
  * research identity, and keep each description to a single restrained sentence.
  * Nothing here may contain confidential or unpublished technical detail.
+ *
+ * Corporate job titles are deliberately not part of this model. The section
+ * communicates technical scope and area of contribution, not rank, so there is
+ * no field to render one. Professional service appointments are a different
+ * thing and live in `service.ts`.
  */
 
 export interface WorkEntry {
   /** The organisation. */
   organisation: string;
-  /** What the work is about — the heading, not the job title. */
+  /** What the work is about — the technical or research area. */
   heading: string;
   /** One sentence. Scope, not accomplishments. */
   description: string;
-  /** Job title. Omit where it adds nothing. */
-  role?: string;
 }
 
 export const work: WorkEntry[] = [
@@ -23,7 +26,6 @@ export const work: WorkEntry[] = [
     heading: 'Implantable Brain–Computer Interfaces',
     description:
       'Engineering and translation of implantable BCI systems spanning system architecture, neural communication platforms, verification and validation, preclinical studies, regulatory testing, and early clinical deployment.',
-    role: 'Senior Electrical Engineer',
   },
   {
     organisation: 'Applied Materials',

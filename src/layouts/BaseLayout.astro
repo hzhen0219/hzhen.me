@@ -47,6 +47,13 @@ const person = {
         },
       }
     : {}),
+  /* Employment-related organisations only.
+   *
+   * Do not add professional service appointments (src/data/service.ts) here.
+   * schema.org `affiliation` signals an organisational membership that search
+   * engines and knowledge panels read as an employer relationship, which would
+   * misrepresent a volunteer institutional review appointment. Professional
+   * service stays in the visible page content only. */
   affiliation: work.map((entry) => ({
     '@type': 'Organization',
     name: entry.organisation,

@@ -4,11 +4,13 @@ import Section from '../components/Section.astro';
 import ResearchPillar from '../components/ResearchPillar.astro';
 import ResearchDirections from '../components/ResearchDirections.astro';
 import WorkEntry from '../components/WorkEntry.astro';
+import ServiceEntry from '../components/ServiceEntry.astro';
 import PublicationList from '../components/PublicationList.astro';
 
 import { site, contact, activeLinks } from '../data/site.ts';
 import { researchAreas, researchDirections } from '../data/research.ts';
 import { work, education } from '../data/work.ts';
+import { service } from '../data/service.ts';
 import { publications } from '../data/publications.ts';
 import { biography } from '../data/about.ts';
 ---
@@ -58,6 +60,16 @@ import { biography } from '../data/about.ts';
         ))
       }
     </dl>
+  </Section>
+
+  <Section
+    id="service"
+    label="Professional Service"
+    note="Professional service supporting institutional review of human-subject research."
+  >
+    <div class="entries">
+      {service.map((entry) => <ServiceEntry entry={entry} />)}
+    </div>
   </Section>
 
   <Section id="publications" label="Publications & Preprints">
