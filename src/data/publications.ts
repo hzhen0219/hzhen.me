@@ -2,8 +2,12 @@
  * Publications and preprints.
  *
  * The array is empty on purpose: nothing is listed until it actually exists.
- * While it is empty the site renders a single line — "Research manuscripts in
- * preparation." — instead of an empty heading.
+ *
+ * While it is empty, the Publications section and its navigation link are not
+ * rendered at all — no heading, no "in preparation" placeholder, nothing that
+ * announces an absence. Adding the first entry below restores both on its own;
+ * there is nothing else to switch on. See `nav` in site.ts and the Publications
+ * section in pages/index.astro.
  *
  * To add the first entry, uncomment the example at the bottom of this file,
  * replace the fields, and drop it into `publications`. Every field except
@@ -34,9 +38,6 @@ export interface Publication {
 }
 
 export const publications: Publication[] = [];
-
-/** Shown in place of the list while `publications` is empty. */
-export const publicationsPlaceholder = 'Research manuscripts in preparation.';
 
 /*
  * ---------------------------------------------------------------------------

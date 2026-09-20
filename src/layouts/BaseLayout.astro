@@ -2,7 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { site, seo, activeLinks } from '../data/site.ts';
-import { work, education } from '../data/work.ts';
+import { education } from '../data/work.ts';
 import '../styles/global.css';
 
 interface Props {
@@ -34,9 +34,12 @@ const person = {
   '@type': 'Person',
   name: site.name,
   url: site.url,
-  jobTitle: site.role,
   description: seo.description,
-  knowsAbout: [...site.researchAreas, ...seo.keywords],
+  /* Deduplicated, and the person's own name dropped — `knowsAbout` is a list of
+   * subjects, not keywords. */
+  knowsAbout: [...new Set([...site.researchAreas, ...seo.keywords])].filter(
+    (topic) => topic !== site.name,
+  ),
   sameAs: activeLinks.map((link) => link.href),
   ...(orcid
     ? {
@@ -47,17 +50,16 @@ const person = {
         },
       }
     : {}),
-  /* Employment-related organisations only.
+  /* No `affiliation`, `worksFor`, or other employment property — deliberately.
    *
-   * Do not add professional service appointments (src/data/service.ts) here.
-   * schema.org `affiliation` signals an organisational membership that search
-   * engines and knowledge panels read as an employer relationship, which would
-   * misrepresent a volunteer institutional review appointment. Professional
-   * service stays in the visible page content only. */
-  affiliation: work.map((entry) => ({
-    '@type': 'Organization',
-    name: entry.organisation,
-  })),
+   * Selected Work lists past and present organisations together, so mapping it
+   * onto `affiliation` asserted current organisational membership for former
+   * employers. schema.org has no way to express "this was true once" here, and
+   * search engines read `affiliation` as a live employer relationship, so the
+   * accurate move is to omit it: the entity is defined by its subjects, its
+   * identifiers, and its education instead. Professional service appointments
+   * (src/data/service.ts) must never be added here either — a volunteer review
+   * appointment is not employment. Both remain in the visible page content. */
   alumniOf: education.map((entry) => ({
     '@type': 'CollegeOrUniversity',
     name: entry.institution,

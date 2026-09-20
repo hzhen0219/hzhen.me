@@ -25,13 +25,13 @@ export const work: WorkEntry[] = [
     organisation: 'Paradromics',
     heading: 'Implantable Brain–Computer Interfaces',
     description:
-      'Engineering and translation of implantable BCI systems spanning system architecture, neural communication platforms, verification and validation, preclinical studies, regulatory testing, and early clinical deployment.',
+      'System-level engineering and translation of implantable BCI systems spanning neural communication platforms, verification and validation, preclinical studies, regulatory testing, and early clinical deployment.',
   },
   {
     organisation: 'Applied Materials',
     heading: 'Complex High-Reliability Systems',
     description:
-      'Engineering experience in complex semiconductor equipment and high-reliability hardware systems.',
+      'Engineering of complex semiconductor manufacturing systems, with a focus on high-reliability electrical hardware and system integration.',
   },
 ];
 

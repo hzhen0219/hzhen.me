@@ -5,6 +5,8 @@
  * name, role, the hero statement, or where people can find you.
  */
 
+import { publications } from './publications.ts';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -20,11 +22,20 @@ export interface ExternalLink {
 
 export const site = {
   name: 'Hao Zhen',
-  role: 'Neurotechnology Engineer & BCI Systems Researcher',
+
+  /**
+   * The field, not a job title.
+   *
+   * This line sits directly under the name and is the primary identity
+   * descriptor, so it names the area of work rather than a position or rank.
+   * Keeping it field-based is deliberate: it stays accurate across
+   * institutions. Do not put a corporate title here.
+   */
+  field: 'Implantable BCI Systems & Translational Neuroengineering',
 
   /** The hero statement. One paragraph, no marketing language. */
   statement:
-    'I work on high-bandwidth implantable brain–computer interfaces, with a focus on the systems that acquire, transmit, and interpret neural information—from neural recording hardware to reliable clinical deployment and AI-based decoding.',
+    'My work spans the architecture and translation of high-bandwidth implantable brain–computer interfaces—from neural acquisition and wireless telemetry to system reliability, preclinical validation, clinical deployment, and neural information processing.',
 
   /** Rendered beneath the hero statement, joined with a middle dot. */
   researchAreas: [
@@ -38,9 +49,9 @@ export const site = {
 } as const;
 
 export const seo = {
-  title: 'Hao Zhen — Neurotechnology Engineer & BCI Systems Researcher',
+  title: 'Hao Zhen — Implantable BCI Systems & Translational Neuroengineering',
   description:
-    'Hao Zhen works on implantable brain–computer interfaces, neural systems, translational neuroengineering, and neural data technologies.',
+    'Hao Zhen works on high-bandwidth implantable brain–computer interfaces, neural systems, translational neuroengineering, clinical translation, and neural information technologies.',
   keywords: [
     'Hao Zhen',
     'brain-computer interface',
@@ -53,15 +64,27 @@ export const seo = {
   ],
   /** Open Graph image, relative to the site root. Replace public/og.png to change it. */
   image: '/og.png',
-  imageAlt: 'Hao Zhen — Neurotechnology Engineer & BCI Systems Researcher',
+  imageAlt: 'Hao Zhen — Implantable BCI Systems & Translational Neuroengineering',
 } as const;
 
-export const nav: NavItem[] = [
+/**
+ * Top navigation.
+ *
+ * Publications is listed here but filtered out below while there is nothing to
+ * link to, so the nav never points at a section the page does not render. Add
+ * the first entry to `publications.ts` and both the link and the section come
+ * back on their own — no edit needed here.
+ */
+const allNav: NavItem[] = [
   { label: 'Research', href: '/#research' },
   { label: 'Work', href: '/#work' },
   { label: 'Publications', href: '/#publications' },
   { label: 'About', href: '/#about' },
 ];
+
+export const nav: NavItem[] = allNav.filter(
+  (item) => item.href !== '/#publications' || publications.length > 0,
+);
 
 /**
  * Secondary / external links.

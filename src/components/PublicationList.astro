@@ -1,6 +1,5 @@
 ---
 import type { Publication } from '../data/publications.ts';
-import { publicationsPlaceholder } from '../data/publications.ts';
 import { site } from '../data/site.ts';
 
 interface Props {
@@ -27,10 +26,10 @@ function linksFor(entry: Publication): { label: string; href: string }[] {
 }
 ---
 
+{/* Renders nothing when empty. The caller is responsible for omitting the
+    whole section, so an absent publication record is never announced. */}
 {
-  publications.length === 0 ? (
-    <p class="publications__empty">{publicationsPlaceholder}</p>
-  ) : (
+  publications.length > 0 && (
     <ol class="publications">
       {publications.map((entry) => (
         <li class="publication">

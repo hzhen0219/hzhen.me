@@ -304,7 +304,7 @@ a:hover {
   margin-bottom: 1rem;
 }
 
-.hero__role {
+.hero__field {
   font-family: var(--font-sans);
   font-size: clamp(0.875rem, 0.83rem + 0.25vw, 1rem);
   font-weight: 500;
@@ -564,11 +564,6 @@ a:hover {
 .publications {
   display: grid;
   gap: 2rem;
-}
-
-.publications__empty {
-  font-style: italic;
-  color: var(--ink-muted);
 }
 
 .publication__title {

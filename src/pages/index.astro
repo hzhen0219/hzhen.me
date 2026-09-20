@@ -19,7 +19,7 @@ import { biography } from '../data/about.ts';
   <section class="hero" aria-labelledby="hero-name">
     <div class="page hero__inner">
       <h1 class="hero__name" id="hero-name">{site.name}</h1>
-      <p class="hero__role">{site.role}</p>
+      <p class="hero__field">{site.field}</p>
       <p class="hero__statement">{site.statement}</p>
       <ul class="hero__areas" aria-label="Research areas">
         {site.researchAreas.map((area) => <li>{area}</li>)}
@@ -62,19 +62,20 @@ import { biography } from '../data/about.ts';
     </dl>
   </Section>
 
-  <Section
-    id="service"
-    label="Professional Service"
-    note="Professional service supporting institutional review of human-subject research."
-  >
+  <Section id="service" label="Professional Service">
     <div class="entries">
       {service.map((entry) => <ServiceEntry entry={entry} />)}
     </div>
   </Section>
 
-  <Section id="publications" label="Publications & Preprints">
-    <PublicationList publications={publications} />
-  </Section>
+  {/* Omitted entirely while there is nothing to list — see publications.ts. */}
+  {
+    publications.length > 0 && (
+      <Section id="publications" label="Publications & Preprints">
+        <PublicationList publications={publications} />
+      </Section>
+    )
+  }
 
   <Section id="about" label="About">
     <div class="prose">

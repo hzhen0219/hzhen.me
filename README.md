@@ -1,6 +1,6 @@
 # hzhen.me
 
-Personal research website of **Hao Zhen** — Neurotechnology Engineer & BCI Systems Researcher.
+Personal research website of **Hao Zhen** — Implantable BCI Systems & Translational Neuroengineering.
 
 A static, single-page site built with [Astro](https://astro.build) and TypeScript,
 deployed on Cloudflare Pages. No backend, no database, no client-side JavaScript,
@@ -93,7 +93,7 @@ to touch a component.
 | **Publications** | `src/data/publications.ts` | See below. |
 | **Links (ORCID, GitHub, LinkedIn)** | `src/data/site.ts` → `externalLinks` | See below. |
 | **Contact** | `src/data/site.ts` → `contact` | See below. |
-| **Hero statement / role / name** | `src/data/site.ts` → `site` | |
+| **Hero statement / field / name** | `src/data/site.ts` → `site` | `site.field` is the line under the name. It names the *field*, not a job title — keep it that way. |
 | **Page title, meta description, keywords** | `src/data/site.ts` → `seo` | |
 | **Selected work / education** | `src/data/work.ts` | Intentionally not a résumé — one restrained sentence per entry. Corporate job titles are deliberately not modelled; see below. |
 | **Professional service** | `src/data/service.ts` | Appointments, not employment. Kept out of the structured data; see below. |
@@ -102,9 +102,12 @@ to touch a component.
 
 ### Adding your first publication
 
-`src/data/publications.ts` exports an empty `publications` array. While it is empty
-the site renders one line — *"Research manuscripts in preparation."* — instead of an
-empty section. Nothing is invented or shown as a placeholder entry.
+`src/data/publications.ts` exports an empty `publications` array. While it is empty,
+**the Publications section and its navigation link are not rendered at all** — no
+heading, no "in preparation" line, nothing that draws attention to an absence. Adding
+the first entry restores the section and the nav link automatically; there is no flag
+to flip. The gating lives in two places, both driven by `publications.length`:
+`nav` in `src/data/site.ts`, and the Publications section in `src/pages/index.astro`.
 
 The `Publication` type is already defined with every field you will need:
 

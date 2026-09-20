@@ -1,9 +1,13 @@
 /**
- * Biography. Two paragraphs, written in the third person, no exaggeration.
- * Edit the strings below; the layout adapts to any number of paragraphs.
+ * Biography. Two paragraphs, third person, no exaggeration.
+ *
+ * The job of this section is to connect the trajectory — complex engineering
+ * systems, implantable medical technology, BCI systems, clinical translation,
+ * neural information — by simply stating it in order. Do not spell the
+ * progression out as a claim, and keep it to roughly this length.
  */
 
 export const biography: string[] = [
-  'Hao Zhen is a neurotechnology engineer and BCI systems researcher working on implantable brain–computer interfaces and translational neuroengineering. His work spans system architecture, neural interface hardware, wireless communication, verification and validation, preclinical studies, regulatory testing, and early clinical translation of implantable neurotechnology.',
-  'His research interests include high-bandwidth implantable neural interfaces, neural data acquisition and transmission, chronic neural interface reliability, distributed BCI systems, and neural signal processing.',
+  'Hao Zhen works at the intersection of implantable neurotechnology, systems engineering, and clinical translation. His experience spans BCI system architecture, neural communication hardware, verification and validation, preclinical studies, regulatory engineering, and early clinical deployment, building on earlier work in complex semiconductor manufacturing systems.',
+  'His research focuses on high-bandwidth implantable neural interfaces, neural information transmission, chronic interface reliability, distributed BCI systems, and neural decoding. He holds an M.Eng. in Engineering Management from Cornell University and a B.S. in Electrical and Computer Engineering from Northeastern University.',
 ];

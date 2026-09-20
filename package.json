@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Personal research website of Hao Zhen — neurotechnology engineer and BCI systems researcher.",
+  "description": "Personal research website of Hao Zhen — implantable BCI systems and translational neuroengineering.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

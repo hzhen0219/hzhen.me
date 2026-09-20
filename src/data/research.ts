@@ -8,7 +8,10 @@
 export interface ResearchArea {
   /** Short title, e.g. "Implantable BCI Systems". */
   title: string;
-  /** One or two sentences in the first person. */
+  /**
+   * One or two sentences describing the agenda in the first person. State what
+   * the work examines, not what the author finds interesting.
+   */
   description: string;
   /** Short noun phrases, rendered as a plain list. Keep them lowercase. */
   topics: string[];
@@ -20,7 +23,7 @@ export const researchAreas: ResearchArea[] = [
   {
     title: 'Implantable BCI Systems',
     description:
-      'I am interested in the architecture of high-bandwidth implantable neural interfaces and the engineering constraints that determine their real-world performance.',
+      'My work examines the architecture of high-bandwidth implantable neural interfaces and the engineering constraints that determine their real-world performance.',
     topics: [
       'neural recording systems',
       'implant electronics',
@@ -37,7 +40,7 @@ export const researchAreas: ResearchArea[] = [
   {
     title: 'Translational Neuroengineering',
     description:
-      'My work also focuses on translating experimental neurotechnology into systems that can operate reliably in preclinical and clinical environments.',
+      'This work extends from experimental neurotechnology to systems designed for reliable operation in preclinical and clinical environments.',
     topics: [
       'verification and validation',
       'system reliability',
@@ -53,7 +56,7 @@ export const researchAreas: ResearchArea[] = [
   {
     title: 'Neural Data & AI',
     description:
-      'I am interested in how neural information should be represented, preserved, transmitted, and modeled in future brain–computer interfaces.',
+      'My research examines how neural information should be represented, preserved, transmitted, and modeled across future brain–computer interfaces.',
     topics: [
       'raw neural signals',
       'spikes and LFP',
