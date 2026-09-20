@@ -526,7 +526,11 @@ a:hover {
   margin-top: 0.85rem;
 }
 
-/* Education: a compact definition list, not a résumé block. */
+/* Education: a compact definition list, not a résumé block.
+   Currently unrendered — the degrees are stated in the About biography instead,
+   and repeating them under Selected Work read as résumé filler. These rules are
+   kept because the `education` data is still live (it feeds `alumniOf`) and the
+   list may return as its own section. Delete them if it does not. */
 .education {
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
   padding-top: 1.5rem;

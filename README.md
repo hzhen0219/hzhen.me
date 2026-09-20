@@ -54,7 +54,7 @@ hzhen.me/
 └── src/
     ├── components/
     │   ├── PublicationList.astro    Renders publications, or the placeholder line
-    │   ├── ResearchDirections.astro Work-in-progress list
+    │   ├── ResearchDirections.astro Research directions list
     │   ├── ResearchPillar.astro     One numbered research area
     │   ├── Section.astro            Sticky label + content, used by every section
     │   ├── ServiceEntry.astro       One professional service appointment
@@ -64,10 +64,10 @@ hzhen.me/
     ├── data/               ← everything you will normally edit lives here
     │   ├── about.ts        Biography paragraphs
     │   ├── publications.ts Publications and preprints (empty by design)
-    │   ├── research.ts     The three research pillars + current research
+    │   ├── research.ts     The three research pillars + research directions
     │   ├── service.ts      Professional service appointments (not employment)
     │   ├── site.ts         Name, role, hero statement, nav, links, SEO, contact
-    │   └── work.ts         Selected work and education
+    │   └── work.ts         Selected work, plus education (structured data only)
     ├── layouts/
     │   └── BaseLayout.astro  <head>, metadata, Person structured data, page shell
     ├── pages/
@@ -89,13 +89,14 @@ to touch a component.
 | --- | --- | --- |
 | **Biography** | `src/data/about.ts` | An array of paragraphs. Add or remove entries freely; the layout adapts. |
 | **Research areas** | `src/data/research.ts` → `researchAreas` | Title, description, topics, and the framing question. The `01 / 02 / 03` numbering comes from array order — reorder the array and the numbers follow. |
-| **Current research** | `src/data/research.ts` → `researchDirections` | Deliberately separate from publications so work in progress is never presented as a published result. |
+| **Research directions** | `src/data/research.ts` → `researchDirections` | Deliberately separate from publications so work in progress is never presented as a published result. |
 | **Publications** | `src/data/publications.ts` | See below. |
 | **Links (ORCID, GitHub, LinkedIn)** | `src/data/site.ts` → `externalLinks` | See below. |
 | **Contact** | `src/data/site.ts` → `contact` | See below. |
 | **Hero statement / field / name** | `src/data/site.ts` → `site` | `site.field` is the line under the name. It names the *field*, not a job title — keep it that way. |
 | **Page title, meta description, keywords** | `src/data/site.ts` → `seo` | |
-| **Selected work / education** | `src/data/work.ts` | Intentionally not a résumé — one restrained sentence per entry. Corporate job titles are deliberately not modelled; see below. |
+| **Selected work** | `src/data/work.ts` → `work` | Intentionally not a résumé — one restrained sentence per entry. Corporate job titles are deliberately not modelled; see below. |
+| **Education** | `src/data/work.ts` → `education` | Not rendered on the page; the degrees are stated in the About biography. The data stays live because it feeds `alumniOf` in the structured data. |
 | **Professional service** | `src/data/service.ts` | Appointments, not employment. Kept out of the structured data; see below. |
 | **Section order or headings** | `src/pages/index.astro` | |
 | **Colours, type scale, spacing** | `src/styles/global.css` | All tokens are defined at the top under `:root`. |
@@ -170,7 +171,7 @@ Once a custom address exists (for example `hao@hzhen.me`), set it in `src/data/s
 ```ts
 export const contact = {
   email: 'hao@hzhen.me',
-  note: 'For research and professional inquiries, connect through LinkedIn or ORCID.',
+  note: 'For research and professional inquiries, connect through ORCID or GitHub.',
 } as const;
 ```
 

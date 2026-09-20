@@ -41,7 +41,7 @@ export const site = {
   researchAreas: [
     'Implantable BCI Systems',
     'Translational Neuroengineering',
-    'Neural Data & AI',
+    'Neural Information & Decoding',
   ],
 
   url: 'https://hzhen.me',
@@ -61,6 +61,7 @@ export const seo = {
     'implantable BCI',
     'translational neuroengineering',
     'neural signal processing',
+    'neural decoding',
   ],
   /** Open Graph image, relative to the site root. Replace public/og.png to change it. */
   image: '/og.png',
@@ -124,5 +125,11 @@ export const activeLinks: ExternalLink[] = externalLinks.filter(
  */
 export const contact = {
   email: '', // e.g. 'hao@hzhen.me'
-  note: 'For research and professional inquiries, connect through LinkedIn or ORCID.',
+  /**
+   * Fallback shown while `email` is empty. Name only channels that are actually
+   * live — LinkedIn has no URL yet, so it is not mentioned here. Once its href
+   * is set it appears in the rendered profile links on its own; update this
+   * sentence then if you want it named.
+   */
+  note: 'For research and professional inquiries, connect through ORCID or GitHub.',
 } as const;

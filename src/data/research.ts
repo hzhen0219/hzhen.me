@@ -54,7 +54,7 @@ export const researchAreas: ResearchArea[] = [
       'How do we translate experimental neural interfaces into reliable systems that can operate in real preclinical and clinical environments?',
   },
   {
-    title: 'Neural Data & AI',
+    title: 'Neural Information & Decoding',
     description:
       'My research examines how neural information should be represented, preserved, transmitted, and modeled across future brain–computer interfaces.',
     topics: [

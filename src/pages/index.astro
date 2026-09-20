@@ -9,7 +9,7 @@ import PublicationList from '../components/PublicationList.astro';
 
 import { site, contact, activeLinks } from '../data/site.ts';
 import { researchAreas, researchDirections } from '../data/research.ts';
-import { work, education } from '../data/work.ts';
+import { work } from '../data/work.ts';
 import { service } from '../data/service.ts';
 import { publications } from '../data/publications.ts';
 import { biography } from '../data/about.ts';
@@ -37,29 +37,17 @@ import { biography } from '../data/about.ts';
     </div>
   </Section>
 
-  <Section
-    id="current-research"
-    label="Current Research"
-    note="Research directions and work in progress. Not completed or published results."
-  >
+  <Section id="research-directions" label="Research Directions">
     <ResearchDirections directions={researchDirections} />
   </Section>
 
   <Section id="work" label="Selected Work">
+    {/* Degrees are stated in the About biography and carried in alumniOf —
+        repeating them here read as résumé filler. The `education` data stays
+        in work.ts for the structured data. */}
     <div class="entries">
       {work.map((entry) => <WorkEntry entry={entry} />)}
     </div>
-
-    <dl class="education">
-      {
-        education.map((item) => (
-          <div class="education__item">
-            <dt class="education__institution">{item.institution}</dt>
-            <dd class="education__degree">{item.degree}</dd>
-          </div>
-        ))
-      }
-    </dl>
   </Section>
 
   <Section id="service" label="Professional Service">
