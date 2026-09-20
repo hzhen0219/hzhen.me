@@ -1,0 +1,16 @@
+---
+import type { WorkEntry } from '../data/work.ts';
+
+interface Props {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+---
+
+<article class="entry">
+  <p class="entry__org">{entry.organisation}</p>
+  <h3 class="entry__heading">{entry.heading}</h3>
+  {entry.role && <p class="entry__role">{entry.role}</p>}
+  <p class="entry__description">{entry.description}</p>
+</article>

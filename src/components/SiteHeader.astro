@@ -1,0 +1,30 @@
+---
+import { site, nav, activeLinks } from '../data/site.ts';
+---
+
+<header class="site-header">
+  <div class="page site-header__inner">
+    <a class="site-header__name" href="/">{site.name}</a>
+
+    <nav class="site-nav" aria-label="Sections">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    {
+      activeLinks.length > 0 && (
+        <nav class="site-nav site-nav--external" aria-label="Profiles">
+          {activeLinks.map((link) => (
+            <a
+              href={link.href}
+              rel="me noopener"
+              target="_blank"
+              title={link.description}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+  </div>
+</header>

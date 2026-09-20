@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import ResearchPillar from '../components/ResearchPillar.astro';
+import ResearchDirections from '../components/ResearchDirections.astro';
+import WorkEntry from '../components/WorkEntry.astro';
+import PublicationList from '../components/PublicationList.astro';
+
+import { site, contact, activeLinks } from '../data/site.ts';
+import { researchAreas, researchDirections } from '../data/research.ts';
+import { work, education } from '../data/work.ts';
+import { publications } from '../data/publications.ts';
+import { biography } from '../data/about.ts';
+---
+
+<BaseLayout path="/" structuredData>
+  <section class="hero" aria-labelledby="hero-name">
+    <div class="page hero__inner">
+      <h1 class="hero__name" id="hero-name">{site.name}</h1>
+      <p class="hero__role">{site.role}</p>
+      <p class="hero__statement">{site.statement}</p>
+      <ul class="hero__areas" aria-label="Research areas">
+        {site.researchAreas.map((area) => <li>{area}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Section id="research" label="Research">
+    <div class="pillars">
+      {
+        researchAreas.map((area, i) => (
+          <ResearchPillar area={area} index={i + 1} />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    id="current-research"
+    label="Current Research"
+    note="Research directions and work in progress. Not completed or published results."
+  >
+    <ResearchDirections directions={researchDirections} />
+  </Section>
+
+  <Section id="work" label="Selected Work">
+    <div class="entries">
+      {work.map((entry) => <WorkEntry entry={entry} />)}
+    </div>
+
+    <dl class="education">
+      {
+        education.map((item) => (
+          <div class="education__item">
+            <dt class="education__institution">{item.institution}</dt>
+            <dd class="education__degree">{item.degree}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section id="publications" label="Publications & Preprints">
+    <PublicationList publications={publications} />
+  </Section>
+
+  <Section id="about" label="About">
+    <div class="prose">
+      {biography.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <div class="contact">
+      <h3 class="label">Contact</h3>
+      {
+        contact.email ? (
+          <p class="contact__note">
+            For research and professional inquiries:{' '}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          </p>
+        ) : (
+          <p class="contact__note">{contact.note}</p>
+        )
+      }
+
+      {
+        activeLinks.length > 0 && (
+          <p class="contact__links">
+            {activeLinks.map((link) => (
+              <a href={link.href} rel="me noopener" target="_blank">
+                {link.label}
+              </a>
+            ))}
+          </p>
+        )
+      }
+    </div>
+  </Section>
+</BaseLayout>

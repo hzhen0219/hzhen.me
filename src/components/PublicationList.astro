@@ -1,0 +1,66 @@
+---
+import type { Publication } from '../data/publications.ts';
+import { publicationsPlaceholder } from '../data/publications.ts';
+import { site } from '../data/site.ts';
+
+interface Props {
+  publications: Publication[];
+}
+
+const { publications } = Astro.props;
+
+/** Bare DOIs are accepted in the data and normalised to a resolvable URL here. */
+function doiUrl(doi: string): string {
+  return doi.startsWith('http') ? doi : `https://doi.org/${doi}`;
+}
+
+function linksFor(entry: Publication): { label: string; href: string }[] {
+  const links = entry.links;
+  if (!links) return [];
+
+  return [
+    links.doi && { label: 'DOI', href: doiUrl(links.doi) },
+    links.paper && { label: 'Paper', href: links.paper },
+    links.preprint && { label: 'Preprint', href: links.preprint },
+    links.code && { label: 'Code', href: links.code },
+  ].filter((link): link is { label: string; href: string } => Boolean(link));
+}
+---
+
+{
+  publications.length === 0 ? (
+    <p class="publications__empty">{publicationsPlaceholder}</p>
+  ) : (
+    <ol class="publications">
+      {publications.map((entry) => (
+        <li class="publication">
+          <h3 class="publication__title">{entry.title}</h3>
+
+          <p class="publication__authors">
+            {entry.authors.map((author, i) => (
+              <>
+                {i > 0 && ', '}
+                {author === site.name ? <em>{author}</em> : author}
+              </>
+            ))}
+          </p>
+
+          <p class="publication__meta">
+            {[entry.venue, String(entry.year)].filter(Boolean).join(' · ')}
+            {entry.preprint && ' · Preprint'}
+          </p>
+
+          {linksFor(entry).length > 0 && (
+            <p class="publication__links">
+              {linksFor(entry).map((link) => (
+                <a href={link.href} rel="noopener" target="_blank">
+                  {link.label}
+                </a>
+              ))}
+            </p>
+          )}
+        </li>
+      ))}
+    </ol>
+  )
+}

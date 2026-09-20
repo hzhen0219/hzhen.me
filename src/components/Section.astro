@@ -1,0 +1,29 @@
+---
+/**
+ * A page section: a sticky label in the left column on wide screens, content on
+ * the right. The label is a real heading so the document outline stays correct.
+ */
+interface Props {
+  id: string;
+  /** Short label shown in the left column, e.g. "Research". */
+  label: string;
+  /** Optional clarifying line beneath the label. */
+  note?: string;
+  /** Heading level for the label. */
+  as?: 'h2' | 'h3';
+}
+
+const { id, label, note, as: Tag = 'h2' } = Astro.props;
+---
+
+<section class="section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="page section__grid">
+    <div class="section__aside">
+      <Tag class="section__title" id={`${id}-title`}>{label}</Tag>
+      {note && <p class="section__note">{note}</p>}
+    </div>
+    <div class="section__body">
+      <slot />
+    </div>
+  </div>
+</section>

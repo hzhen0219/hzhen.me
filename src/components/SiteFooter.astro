@@ -1,0 +1,23 @@
+---
+import { site, activeLinks } from '../data/site.ts';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="page site-footer__inner">
+    <p>© {year} {site.name}</p>
+
+    {
+      activeLinks.length > 0 && (
+        <nav class="site-footer__links" aria-label="Profiles">
+          {activeLinks.map((link) => (
+            <a href={link.href} rel="me noopener" target="_blank">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+  </div>
+</footer>

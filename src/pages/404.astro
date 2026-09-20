@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { seo } from '../data/site.ts';
+---
+
+<BaseLayout
+  title={`Page not found — ${seo.title}`}
+  description="The requested page could not be found."
+  path="/404"
+  noindex
+>
+  <div class="page notfound">
+    <p class="notfound__code">404</p>
+    <h1 class="notfound__title">This page does not exist.</h1>
+    <p class="contact__note">
+      <a href="/">Return to the main page</a>
+    </p>
+  </div>
+</BaseLayout>

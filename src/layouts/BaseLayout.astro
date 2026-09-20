@@ -1,0 +1,117 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site, seo, activeLinks } from '../data/site.ts';
+import { work, education } from '../data/work.ts';
+import '../styles/global.css';
+
+interface Props {
+  /** Full <title>. Defaults to the site-wide title. */
+  title?: string;
+  description?: string;
+  /** Path of the current page, used for the canonical URL. */
+  path?: string;
+  /** Person structured data is only useful on the main page. */
+  structuredData?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title = seo.title,
+  description = seo.description,
+  path = '/',
+  structuredData = false,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+const ogImage = new URL(seo.image, site.url).href;
+
+const orcid = activeLinks.find((link) => link.label === 'ORCID');
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: site.role,
+  description: seo.description,
+  knowsAbout: [...site.researchAreas, ...seo.keywords],
+  sameAs: activeLinks.map((link) => link.href),
+  ...(orcid
+    ? {
+        identifier: {
+          '@type': 'PropertyValue',
+          propertyID: 'ORCID',
+          value: orcid.href,
+        },
+      }
+    : {}),
+  affiliation: work.map((entry) => ({
+    '@type': 'Organization',
+    name: entry.organisation,
+  })),
+  alumniOf: education.map((entry) => ({
+    '@type': 'CollegeOrUniversity',
+    name: entry.institution,
+  })),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={seo.keywords.join(', ')} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#fdfdfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101214" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seo.imageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={seo.imageAlt} />
+
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(person)}
+        />
+      )
+    }
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

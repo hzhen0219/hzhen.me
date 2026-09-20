@@ -1,0 +1,20 @@
+---
+import type { ResearchDirection } from '../data/research.ts';
+
+interface Props {
+  directions: ResearchDirection[];
+}
+
+const { directions } = Astro.props;
+---
+
+<ul class="directions">
+  {
+    directions.map((direction) => (
+      <li class="direction">
+        <h3 class="direction__title">{direction.title}</h3>
+        <p class="direction__summary">{direction.summary}</p>
+      </li>
+    ))
+  }
+</ul>

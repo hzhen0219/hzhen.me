@@ -1,0 +1,26 @@
+---
+import type { ResearchArea } from '../data/research.ts';
+
+interface Props {
+  area: ResearchArea;
+  /** 1-based position; rendered as 01, 02, 03. */
+  index: number;
+}
+
+const { area, index } = Astro.props;
+const number = String(index).padStart(2, '0');
+---
+
+<article class="pillar">
+  <p class="pillar__index" aria-hidden="true">{number}</p>
+  <h3 class="pillar__title">{area.title}</h3>
+  <p class="pillar__description">{area.description}</p>
+
+  <ul class="pillar__topics" aria-label={`Topics in ${area.title}`}>
+    {area.topics.map((topic) => <li>{topic}</li>)}
+  </ul>
+
+  <blockquote class="pillar__question">
+    <p>{area.question}</p>
+  </blockquote>
+</article>
